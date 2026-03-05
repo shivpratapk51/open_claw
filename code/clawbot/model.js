@@ -2,9 +2,9 @@ import { json, z } from "zod";
 import { zodToJsonSchema } from "zod-to-json-schema";
 import { execSync } from "node:child_process";
 import Groq from "groq-sdk";
-import 'dotenv/config'
+import "dotenv/config";
 
-const key = process.env.GROQ_API_KEY
+const key = process.env.GROQ_API_KEY;
 console.log(key);
 
 const groq = new Groq({
@@ -16,7 +16,6 @@ function executeCommand(cmd = "") {
   const result = execSync(cmd);
   return result.toString();
 }
-
 
 const functionMapping = {
   executeCommand,
@@ -63,7 +62,7 @@ export async function run(query = "") {
   });
   while (true) {
     const response = await groq.chat.completions.create({
-      model: "moonshotai/kimi-k2-instruct",
+      model: process.env.MODEL,
       messages: messages,
       response_format: {
         type: "json_schema",

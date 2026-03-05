@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 8000;
 
 app.use(express.json());
 app.use(cors());
+
 app.post("/message", async (req, res) => {
   const { message } = req.body;
   // console.log(message);
